@@ -1,6 +1,6 @@
 <?php
 
-$dbname = "app";
+$dbname = "app_crud";
 $servidor = "localhost";
 $user = "root";
 $password = "";

@@ -1,3 +1,10 @@
+<?php
+require_once("../../BD.php");
+$sentencia = $conexion->prepare("SELECT * FROM `tbl_puestos`");
+$sentencia->execute();
+$lista_tbl_puestos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+print_r($lista_tbl_puestos);
+?>
 <?php require_once("../../templates/header.php") ?>
 <h1>Puestos</h1>
 <div class="card">
@@ -15,14 +22,18 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <?php foreach ($lista_tbl_puestos as $registro) { ?>
                     <tr class="">
-                        <td scope="row">1</td>
-                        <td>Programador Jr</td>
+                        <td scope="row"><?php echo $registro ['ID']; ?>
+                    </td>
+                        <td><?php echo $registro ['puesto']; ?>
+                    </td>
                         <td>
                             <a name="" id="" class="btn btn-info" href="#" role="button">Editar</a>
                             <a name="" id="" class="btn btn-danger" href="#" role="button">Eliminar</a>
                         </td>
                     </tr>
+                    <?php } ?>
                 </tbody>
             </table>
         </div>
