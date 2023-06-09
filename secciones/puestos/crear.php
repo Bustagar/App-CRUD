@@ -1,3 +1,15 @@
+<?php 
+if($_POST){
+
+require_once("../../BD.php");
+$nombredelpuesto=(isset($_POST["nombredelpuesto"])? $_POST["nombredelpuesto"] : "");
+$sentencia = $conexion->prepare("INSERT INTO `tbl_puestos`(`ID`, `puesto`) VALUES (null,:nombredelpuesto)");
+$sentencia->bindValue(":nombredelpuesto",$nombredelpuesto);
+$sentencia->execute();
+header("Location:index.php");
+}
+?>
+
 <?php require_once("../../templates/header.php") ?>
 
 <div class="card">
