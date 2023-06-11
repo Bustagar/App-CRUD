@@ -4,7 +4,7 @@ require_once("../../BD.php");
 if (isset($_GET["txtID"])) {
     $txtID = (isset($_GET["txtID"]) ? $_GET["txtID"] : "");
     $sentencia = $conexion->prepare("DELETE FROM `tbl_puestos` WHERE `ID`=:ID");
-    $sentencia->bindValue(":ID",$txtID);
+    $sentencia->bindValue(":ID", $txtID);
     $sentencia->execute();
     header("Location:index.php");
 }
@@ -32,13 +32,15 @@ $lista_tbl_puestos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
                 <tbody>
                     <?php foreach ($lista_tbl_puestos as $registro) { ?>
                     <tr class="">
-                        <td scope="row"><?php echo $registro ['ID']; ?>
-                    </td>
-                        <td><?php echo $registro ['puesto']; ?>
+                        <td scope="row">
+                            <?php echo $registro ['ID']; ?>
                     </td>
                         <td>
-                            <a name="" id="" class="btn btn-info" href="#" role="button">Editar</a>
-                            <a name="" id="" class="btn btn-danger" href="index.php?txtID=>?<?php echo $registro ['ID']; ?>" role="button">Eliminar</a>
+                            <?php echo $registro ['puesto']; ?>
+                    </td>
+                        <td>
+                            <a name="" id="" class="btn btn-info" href="editar.php?txtID=<?php echo $registro['ID']; ?>" role="button">Editar</a>
+                            <a name="" id="" class="btn btn-danger" href="index.php?txtID=<?php echo $registro ['ID']; ?>" role="button">Eliminar</a>
                         </td>
                     </tr>
                     <?php } ?>
