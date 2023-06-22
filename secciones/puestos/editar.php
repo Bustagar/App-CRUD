@@ -10,9 +10,9 @@ if (isset($_GET["txtID"])) {
 }
 if($_POST){
     $txtID = (isset($_POST["txtID"]) ? $_POST["txtID"] : "");
-    $nombredelpuesto=(isset($_POST["nombredelpuesto"])? $_POST["nombredelpuesto"] : "");
+    $nombredelpuesto=(isset($_POST["puesto"])? $_POST["puesto"] : "");
     $sentencia = $conexion->prepare("UPDATE `tbl_puestos` SET `puesto`=:puesto WHERE ID=:ID");
-    $sentencia->bindValue(":nombredelpuesto",$nombredelpuesto);
+    $sentencia->bindValue(":puesto",$nombredelpuesto);
     $sentencia->bindValue(":ID", $txtID);
     $sentencia->execute();
     header("Location:index.php");
@@ -35,7 +35,7 @@ if($_POST){
             
                 <label for="nombredelpuesto" class="form-label">Nombre del Puesto</label>
                 <input type="text"
-                class="form-control" name="nombredelpuesto" id="nombredelpuesto" aria-describedby="helpId" value="<?php echo $puesto;?>" placeholder="">
+                class="form-control" name="puesto" id="puesto" aria-describedby="helpId" value="<?php echo $puesto;?>" placeholder="">
             </div>
             <button type="submit" name="" id="" class="btn btn-primary" role="button">Editar Registro</button>
             <a name="" id="" class="btn btn-danger" href="./index.php" role="button">Cancelar</a>
