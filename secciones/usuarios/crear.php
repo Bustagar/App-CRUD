@@ -4,8 +4,10 @@ if($_POST){
     $usuario=(isset($_POST["usuario"])? $_POST["usuario"] : "");
     $password=(isset($_POST["password"])? $_POST["password"] : "");
     $correo=(isset($_POST["password"])? $_POST["password"] : "");
-    $sentencia = $conexion->prepare("INSERT INTO `tbl_puestos`(`ID`, `puesto`) VALUES (null,:nombredelpuesto)");
-    $sentencia->bindValue(":nombredelpuesto",$nombredelpuesto);
+    $sentencia = $conexion->prepare("INSERT INTO `tbl_usuarios`(`ID`, `usuario`, `password`, `correo`) VALUES (NULL,:usuario, :password, :correo);");
+    $sentencia->bindValue(":usuario",$usuario);
+    $sentencia->bindValue(":password",$password);
+    $sentencia->bindValue(":correo",$correo);
     $sentencia->execute();
     header("Location:index.php");
 }
@@ -18,13 +20,13 @@ if($_POST){
     <div class="card-body">
         <form action="" method="post">
             <div class="mb-3">
-                <label for="nombredelusuario" class="form-label">Nombre del Usuario</label>
+                <label for="usuario" class="form-label">Nombre del Usuario</label>
                 <input type="text"
-                class="form-control" name="nombredelusuario" id="nombredelusuario" aria-describedby="helpId" placeholder="">
+                class="form-control" name="usuario" id="usuario" aria-describedby="helpId" placeholder="">
 
                 <div class="mb-3">
-                    <label for="contraseña" class="form-label">Contraseña</label>
-                    <input type="password" class="form-control" name="contraseña" id="contraseña" placeholder="">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" name="password" id="password" placeholder="">
                 </div>
 
                 <div class="mb-3">
