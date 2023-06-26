@@ -1,6 +1,12 @@
 <?php 
 require_once("../../BD.php");
-
+if (isset($_GET["txtID"])) {
+    $txtID = (isset($_GET["txtID"]) ? $_GET["txtID"] : "");
+    $sentencia = $conexion->prepare("DELETE FROM `tbl_usuarios` WHERE `ID`=:ID");
+    $sentencia->bindValue(":ID", $txtID);
+    $sentencia->execute();
+    header("Location:index.php");
+}
 $sentencia = $conexion->prepare("SELECT * FROM `tbl_usuarios`");
 $sentencia->execute();
 $lista_tbl_usuarios = $sentencia->fetchAll(PDO::FETCH_ASSOC);
@@ -31,8 +37,8 @@ $lista_tbl_usuarios = $sentencia->fetchAll(PDO::FETCH_ASSOC);
                         <td><?php echo $registro ['password']; ?></td>
                         <td><?php echo $registro ['correo']; ?></td>
                         <td>
-                            <a name="" id="" class="btn btn-info" href="#" role="button">Editar</a>
-                            <a name="" id="" class="btn btn-danger" href="#" role="button">Eliminar</a>
+                            <a name="" id="" class="btn btn-info" href="editar.php?txtID=<?php echo $registro['ID']; ?>" role="button">Editar</a>
+                            <a name="" id="" class="btn btn-danger" href="index.php?txtID=<?php echo $registro ['ID']; ?>" role="button">Eliminar</a>
                         </td>
                     </tr>
                 <?php } ?>
