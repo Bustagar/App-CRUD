@@ -1,4 +1,9 @@
-<?php require_once("../../Templates/header.php") ?>
+<?php 
+require_once("../../BD.php");
+$sentencia = $conexion->prepare("SELECT * FROM `tbl_empleados`");
+$sentencia->execute();
+$lista_tbl_empleados = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+require_once("../../Templates/header.php") ?>
 
 <h1>Empleados</h1>
     <div class="card">
@@ -20,17 +25,34 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <?php foreach($lista_tbl_empleados as $registro) { ?>
                     <tr class="">
-                        <td scope="row">1</td>
-                        <td>Sebastian Bustamante</td>
-                        <td>Imagen.jpg</td>
-                        <td>CV.pdf</td>
-                        <td>Desarrollador Full Stack</td>
-                        <td>23/09/2022</td>
-                        <td><a name="" id="" class="btn btn-primary" href="#" role="button">Carta</a>
+                        <td scope="row"><?php echo $registro ['ID']; ?></td>
+                        <td>
+                            <?php echo $registro ['primer nombre']; ?>
+                            <?php echo $registro ['segundo nombre']; ?>
+                            <?php echo $registro ['primer apellido']; ?>
+                            <?php echo $registro ['segundo apellido']; ?>
+                        </td>
+                        <td>
+                            <?php echo $registro ['foto']; ?>
+                        </td>
+                        <td>
+                            <?php echo $registro ['cv']; ?>
+                        </td>
+                        <td>
+                            <?php echo $registro ['idpuesto']; ?>
+                        </td>
+                        <td>
+                            <?php echo $registro ['fecha de ingreso']; ?>
+                        </td>
+                        <td>
+                            <a name="" id="" class="btn btn-primary" href="#" role="button">Carta</a>
                             <a name="" id="" class="btn btn-info" href="../empleados/editar.php" role="button">Editar</a>
-                            <a name="" id="" class="btn btn-danger" href="#" role="button">Eliminar</a></td>
+                            <a name="" id="" class="btn btn-danger" href="#" role="button">Eliminar</a>
+                        </td>
                     </tr>
+                    <?php } ?>
                 </tbody>
             </table>
         </div>
