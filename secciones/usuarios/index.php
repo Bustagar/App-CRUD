@@ -34,7 +34,7 @@ $lista_tbl_usuarios = $sentencia->fetchAll(PDO::FETCH_ASSOC);
                     <tr class="">
                         <td scope="row"><?php echo $registro ['ID']; ?></td>
                         <td><?php echo $registro ['usuario']; ?></td>
-                        <td><?php echo $registro ['password']; ?></td>
+                        <td>*******</td>
                         <td><?php echo $registro ['correo']; ?></td>
                         <td>
                             <a name="" id="" class="btn btn-info" href="editar.php?txtID=<?php echo $registro['ID']; ?>" role="button">Editar</a>
